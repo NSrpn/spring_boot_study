@@ -13,6 +13,9 @@ public class Book extends BaseEntity {
   @Column(precision = 15, scale = 2)
   private Float price;
 
+  @Column
+  private String imgFileName;
+
   @ManyToOne
   @JoinColumn(name = "author_id", nullable = false)
   private Author author;
@@ -43,6 +46,14 @@ public class Book extends BaseEntity {
 
   public void setPrice(Float price) {
     this.price = price;
+  }
+
+  public String getImgFileName() {
+    return imgFileName != null ? imgFileName : "default_book.png";
+  }
+
+  public void setImgFileName(String imgFilename) {
+    this.imgFileName = imgFilename;
   }
 
 }
