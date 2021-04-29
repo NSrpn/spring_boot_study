@@ -1,6 +1,4 @@
-
-<!--END-->
-<!--END--><!DOCTYPE html><!--[if IE 7]>
+<!DOCTYPE html><!--[if IE 7]>
 <html class="ie7" lang="ru">
 <![endif]-->
 <!--[if IE 8]>
@@ -10,7 +8,7 @@
 <html class="ie9" lang="ru">
 <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-<head th:replace="templates/tplPages::head('Авторы', 'Авторы')" />
+<head th:replace="templates/tplPages::head(#{authors.title.plural}, #{authors.title.plural})" />
 <body class="Site">
   <!--if lt IE 8
   p.error-browser
@@ -25,7 +23,7 @@
   <div class="Middle">
     <div class="wrap">
       <main class="Middle-main">
-        <h1 class="Middle-title">Авторы
+        <h1 class="Middle-title" th:text="#{authors.title.plural}">Авторы
         </h1>
         <div class="Section">
           <div class="Authors">

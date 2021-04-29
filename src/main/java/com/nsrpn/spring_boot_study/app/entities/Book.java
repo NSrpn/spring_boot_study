@@ -2,6 +2,9 @@ package com.nsrpn.spring_boot_study.app.entities;
 
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name = "Books")
@@ -15,6 +18,15 @@ public class Book extends BaseEntity {
 
   @Column
   private String imgFileName;
+
+  @Column(precision = 5, scale = 2)
+  private Float sale;
+
+  @Column
+  private Date addDate;
+
+  @Column
+  private String tags;
 
   @ManyToOne
   @JoinColumn(name = "author_id", nullable = false)
@@ -54,6 +66,30 @@ public class Book extends BaseEntity {
 
   public void setImgFileName(String imgFilename) {
     this.imgFileName = imgFilename;
+  }
+
+  public Float getSale() {
+    return sale;
+  }
+
+  public void setSale(Float sale) {
+    this.sale = sale;
+  }
+
+  public Date getAddDate() {
+    return addDate;
+  }
+
+  public void setAddDate(Date addDate) {
+    this.addDate = addDate;
+  }
+
+  public List<String> getTags() {
+    return Arrays.asList(tags.split(","));
+  }
+
+  public void setTags(List<String> tagsList) {
+    this.tags = String.join(",", tagsList);
   }
 
 }

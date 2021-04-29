@@ -40,6 +40,7 @@ public class AuthorController {
         return "/authors/slug";
     }
 
+    // Это оставлю так, чтобы разделить инфо и список
     private void prepareCommonModelForSlug(Long id, Model model, HttpSession session) {
         model.addAttribute("author", authorService.getById(id));
     }

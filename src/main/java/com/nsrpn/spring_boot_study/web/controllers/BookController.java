@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping(value = "/books")
 public class BookController {
 
-  private final String contentPage = "bookDict";
   private Logger logger = LoggerFactory.getLogger(BookController.class);
   private BookService bookService;
 
@@ -25,16 +24,30 @@ public class BookController {
     this.bookService = bookService;
   }
 
-  @GetMapping
+  @GetMapping(path = "/author")
   public String booksDict(Model model, HttpSession session) {
-    model.addAttribute("book", new Book());
-    prepareCommonModelForIndex(model, session);
-    return "index";
+    return "redirect:books/author";
   }
 
-  private void prepareCommonModelForIndex(Model model, HttpSession session) {
-    model.addAttribute("content", contentPage);
-    List<Book> books = bookService.getAll();
-    model.addAttribute("bookList", books);
+  @GetMapping(path = "/recent")
+  public String booksRecent(Model model, HttpSession session) {
+    return "redirect:books/recent";
   }
+
+  @GetMapping(path = "/popular")
+  public String booksPopular(Model model, HttpSession session) {
+    return "redirect:books/recent";
+  }
+
+
+  @ModelAttribute(name = "book")
+  public Book attrBook() {
+    return new Book();
+  }
+
+  @ModelAttribute(name = "bookList")
+  public List<Book> attrBookList() {
+    return bookService.getAll();
+  }
+
 }

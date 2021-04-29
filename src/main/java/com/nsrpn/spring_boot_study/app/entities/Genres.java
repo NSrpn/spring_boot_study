@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="genres")
+@Table(name="Genres")
 public class Genres extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "parent_id", nullable = true)
