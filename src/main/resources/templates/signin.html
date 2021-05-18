@@ -8,7 +8,7 @@
 <html class="ie9" lang="ru">
 <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-<head th:replace="templates/tplPages::head('Вход', 'Вход')" />
+<head th:replace="templates/tplPages::head(#{pages.title.signin}, #{pages.title.signin})" />
 <body class="Site">
   <!--if lt IE 8
   p.error-browser
@@ -19,11 +19,11 @@
           | браузера здесь&nbsp;
       | для правильного отображения сайта.
   -->
-  <header th:replace="templates/tplPages::header()" />
+  <header th:replace="templates/tplPages::header()"></header>
   <div class="Middle Middle_form">
     <div class="Middle-top">
       <div class="wrap">
-        <h1 class="Middle-title">Вход
+        <h1 class="Middle-title" th:text="#{pages.title.signin}">Вход
         </h1>
       </div>
     </div>
@@ -85,13 +85,13 @@
                 </button>
               </div>
             </div>
-            <div class="form-group form-group_center"><a class="Login-reg" href="/signup.html">Зарегистрироваться</a>
+            <div class="form-group form-group_center"><a class="Login-reg" href="/signup">Зарегистрироваться</a>
             </div>
           </div>
         </form>
       </main>
     </div>
   </div>
-  <footer th:replace="templates/tplPages::footer()" />
+  <footer th:replace="templates/tplPages::footer()"></footer>
   <script src="/assets/plg/jQuery/jquery-3.5.1.min.js"></script>
 </body></html>

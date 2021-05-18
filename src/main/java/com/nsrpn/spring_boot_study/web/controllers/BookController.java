@@ -26,19 +26,24 @@ public class BookController {
 
   @GetMapping(path = "/author")
   public String booksDict(Model model, HttpSession session) {
-    return "redirect:books/author";
+    return "/books/author";
   }
 
   @GetMapping(path = "/recent")
   public String booksRecent(Model model, HttpSession session) {
-    return "redirect:books/recent";
+    return "/books/recent";
   }
 
   @GetMapping(path = "/popular")
   public String booksPopular(Model model, HttpSession session) {
-    return "redirect:books/recent";
+    return "/books/popular";
   }
 
+  @GetMapping(path = "/slug")
+  public String booksSlug(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
+    model.addAttribute("book", bookService.getById(id));
+    return "/books/slug";
+  }
 
   @ModelAttribute(name = "book")
   public Book attrBook() {

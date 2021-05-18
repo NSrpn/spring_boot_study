@@ -8,7 +8,7 @@
 <html class="ie9" lang="ru">
 <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-<head th:replace="templates/tplPages::head(${author.getTitle()}, ${author.getTitle()})" />
+<head th:replace="templates/tplPages::head(${author.getTitle()}, ${author.getTitle()})"></head>
 <body class="Site">
   <!--if lt IE 8
   p.error-browser
@@ -19,7 +19,7 @@
           | браузера здесь&nbsp;
       | для правильного отображения сайта.
   -->
-  <header th:replace="templates/tplPages::header()" />
+  <header th:replace="templates/tplPages::header()"></header>
   <div class="Middle">
     <div class="wrap">
       <main class="Middle-main">
@@ -63,21 +63,7 @@
             <div class="Slider-box Cards">
               <div class="Slider-item" th:each="book : ${author.getBooks()}">
                 <div class="Slider-content">
-                  <div class="Card">
-                    <div class="Card-picture">
-                      <a href="/books/slug.html">
-                        <img th:src="${'/assets/img/content/books/' + book.getImgFileName()}" th:alt="${'/assets/img/content/books/' + book.getImgFileName()}"/>
-                      </a>
-                    </div>
-                    <div class="Card-content">
-                      <strong class="Card-title" th:text="${book.title}"><a th:href="${'/books/slug?id=' + book.id}">...</a></strong>
-                      <div class="Card-description" th:text="${author.title}">...</div>
-                      <div class="Card-cost">
-                        <span class="Card-priceOld" th:text="${book.priceOld}">0</span>
-                        <span class="Card-price"  th:text="${book.price}">0</span>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="Card" th:replace="templates/tplPages::card(book)"></div>
                 </div>
               </div>
             </div>
@@ -86,12 +72,15 @@
               </div>
             </div>
           </div>
-          <footer class="Section-footer"><a class="Author-books" href="/books/author.html" th:text="#{authors.books.all}">Все книги автора<span class="Author-amount">(55)</span></a>
+          <footer class="Section-footer">
+            <a class="Author-books" href="/books/author.html" th:text="#{authors.books.all}">Все книги автора
+              <span class="Author-amount" th:text="'(' + ${author.getBooks().size()} + ')'"></span>
+            </a>
           </footer>
         </div>
       </main>
     </div>
   </div>
-  <footer th:replace="templates/tplPages::footer()" />
+  <footer th:replace="templates/tplPages::footer()"></footer>
   <script src="/assets/plg/jQuery/jquery-3.5.1.min.js"></script>
 </body></html>

@@ -10,19 +10,26 @@ import javax.servlet.http.HttpSession;
 public class SinglePagesController {
   @GetMapping(path = "/documents")
   public String documents(Model model, HttpSession session) {
-    return "index";
+    return "/documents/index";
   }
   @GetMapping(path = "/about")
   public String about(Model model, HttpSession session) {
-    return "index";
+    return "about";
   }
   @GetMapping(path = "/faq")
   public String faq(Model model, HttpSession session) {
-    return "index";
+    return "faq";
   }
   @GetMapping(path = "/contacts")
   public String contacts(Model model, HttpSession session) {
-    return "index";
+    return "contacts";
   }
-
+  @GetMapping(path = "/signin")
+  public String signin(Model model, HttpSession session) {
+    return "signin";
+  }
+  @GetMapping(path = "/signup")
+  public String signup(Model model, HttpSession session) {
+    return "signup";
+  }
 }
