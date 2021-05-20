@@ -8,7 +8,7 @@
 <html class="ie9" lang="ru">
 <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-<head th:replace="templates/tplPages::head('Жанры', 'Жанры')" />
+<head th:replace="templates/tplPages::head(#{pages.title.error}, #{pages.title.error})" />
 <body class="Site">
 <!--if lt IE 8
 p.error-browser
@@ -19,7 +19,6 @@ p.error-browser
         | браузера здесь&nbsp;
     | для правильного отображения сайта.
 -->
-<header th:replace="templates/tplPages::header()"></header>
 <div class="Middle">
     <div class="wrap">
         <main class="Middle-main">
@@ -31,7 +30,6 @@ p.error-browser
         </main>
     </div>
 </div>
-<footer th:replace="templates/tplPages::footer()"></footer>
 <script src="/assets/plg/jQuery/jquery-3.5.1.min.js"></script>
 <!--+menu(-->
 <!--    'Это раз',-->

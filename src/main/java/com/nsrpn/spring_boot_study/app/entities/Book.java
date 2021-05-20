@@ -28,6 +28,8 @@ public class Book extends BaseEntity {
   @Column
   private String tags;
 
+  private Integer stars;
+
   @ManyToOne
   @JoinColumn(name = "author_id", nullable = false)
   private Author author;
@@ -92,4 +94,11 @@ public class Book extends BaseEntity {
     this.tags = String.join(",", tagsList);
   }
 
+  public Integer getStars() {
+    return stars == null ? 0 : stars;
+  }
+
+  public void setStars(Integer stars) {
+    this.stars = stars;
+  }
 }

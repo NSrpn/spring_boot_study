@@ -1,8 +1,10 @@
 package com.nsrpn.spring_boot_study.web.controllers;
 
+import com.nsrpn.spring_boot_study.app.entities.Book;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,5 +33,18 @@ public class SinglePagesController {
   @GetMapping(path = "/signup")
   public String signup(Model model, HttpSession session) {
     return "signup";
+  }
+  @GetMapping(path = "/cart")
+  public String cart(Model model, HttpSession session) {
+    return "cart";
+  }
+  @GetMapping(path = "/postponed")
+  public String postponed(Model model, HttpSession session) {
+    return "postponed";
+  }
+
+  @ModelAttribute(name = "book")
+  public Book attrBook() {
+    return new Book();
   }
 }
