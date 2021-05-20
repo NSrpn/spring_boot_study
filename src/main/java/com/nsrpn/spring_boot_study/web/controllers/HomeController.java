@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -29,7 +30,7 @@ public class HomeController {
   }
 
   @GetMapping
-  public String home(Model model, HttpSession session) {
+  public String home(Model model, HttpServletRequest httpServletRequest, HttpSession session) {
     return "index";
   }
 

@@ -108,19 +108,19 @@
         <div class="wrap">
             <nav class="menuModal" id="navigate">
                 <ul class="menu menu_main">
-                    <li class="menu-item">
+                    <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/')} ? menu-item_ACTIVE">
                         <a class="menu-link" href="/" th:text="#{pages.title.main}">Главная</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/genres')} ? menu-item_ACTIVE">
                         <a class="menu-link" href="/genres" th:text="#{pages.title.genres}">Жанры</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/books/recent')} ? menu-item_ACTIVE">
                         <a class="menu-link" href="/books/recent" th:text="#{pages.title.recent}">Новинки</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/books/popular')} ? menu-item_ACTIVE">
                         <a class="menu-link" href="/books/popular" th:text="#{pages.title.popular}">Популярное</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/authors')} ? menu-item_ACTIVE">
                         <a class="menu-link" href="/authors" th:text="#{pages.title.authors}">Авторы</a>
                     </li>
                 </ul>
