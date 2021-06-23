@@ -1,13 +1,11 @@
 package com.nsrpn.spring_boot_study.app.entities;
 
-
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
-@Table(name = "Books")
+@Table(name = "books")
 public class Book extends BaseEntity {
 
   @Column(name = "priceold", precision = 15, scale = 2)
@@ -17,33 +15,57 @@ public class Book extends BaseEntity {
   private Float price;
 
   @Column
-  private String imgFileName;
+  private String image;
 
   @Column(precision = 5, scale = 2)
-  private Float sale;
+  private Float discount;
 
   @Column
-  private Date addDate;
+  private Date pub_date;
 
   @Column
-  private String tags;
-
   private Integer stars;
 
-  @ManyToOne
-  @JoinColumn(name = "author_id", nullable = false)
-  private Author author;
+  @Column
+  private Boolean is_bestseller;
+
+  @Column
+  private String slug;
+
+  @Column(length = 4000)
+  private String description;
+
+  @ManyToMany
+  @JoinTable(
+          name = "authors2book",
+          joinColumns = @JoinColumn(name = "book_id"),
+          inverseJoinColumns = @JoinColumn(name = "author_id"))
+  private List<Author> authors;
+
+  @ManyToMany
+  @JoinTable(
+          name = "tags2book",
+          joinColumns = @JoinColumn(name = "book_id"),
+          inverseJoinColumns = @JoinColumn(name = "tag_id"))
+  private List<Tag> tags;
+
+  @ManyToMany
+  @JoinTable(
+          name = "genres2book",
+          joinColumns = @JoinColumn(name = "book_id"),
+          inverseJoinColumns = @JoinColumn(name = "genre_id"))
+  private List<Tag> genres;
 
   public Book() {
     super();
   }
 
-  public Author getAuthor() {
-    return author;
+  public List<Author> getAuthors() {
+    return authors;
   }
 
-  public void setAuthor(Author author) {
-    this.author = author;
+  public void setAuthors(List<Author> authors) {
+    this.authors = authors;
   }
 
   public Float getPriceOld() {
@@ -62,36 +84,36 @@ public class Book extends BaseEntity {
     this.price = price;
   }
 
-  public String getImgFileName() {
-    return imgFileName != null ? imgFileName : "default_book.png";
+  public String getImage() {
+    return image != null ? image : "default_book.png";
   }
 
-  public void setImgFileName(String imgFilename) {
-    this.imgFileName = imgFilename;
+  public void setImage(String image) {
+    this.image = image;
   }
 
-  public Float getSale() {
-    return sale;
+  public Float getDiscount() {
+    return discount;
   }
 
-  public void setSale(Float sale) {
-    this.sale = sale;
+  public void setDiscount(Float discount) {
+    this.discount = discount;
   }
 
-  public Date getAddDate() {
-    return addDate;
+  public Date getPub_date() {
+    return pub_date;
   }
 
-  public void setAddDate(Date addDate) {
-    this.addDate = addDate;
+  public void setPub_date(Date pub_date) {
+    this.pub_date = pub_date;
   }
 
-  public List<String> getTags() {
-    return Arrays.asList(tags.split(","));
+  public List<Tag> getTags() {
+    return tags;
   }
 
-  public void setTags(List<String> tagsList) {
-    this.tags = String.join(",", tagsList);
+  public void setTags(List<Tag> tags) {
+    this.tags = tags;
   }
 
   public Integer getStars() {
@@ -101,4 +123,29 @@ public class Book extends BaseEntity {
   public void setStars(Integer stars) {
     this.stars = stars;
   }
+
+  public Boolean getIs_bestseller() {
+    return is_bestseller;
+  }
+
+  public void setIs_bestseller(Boolean is_bestseller) {
+    this.is_bestseller = is_bestseller;
+  }
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
 }

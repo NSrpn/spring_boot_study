@@ -1,6 +1,7 @@
 package com.nsrpn.spring_boot_study.web.controllers;
 
 import com.nsrpn.spring_boot_study.app.entities.Book;
+import com.nsrpn.spring_boot_study.app.services.AuthorService;
 import com.nsrpn.spring_boot_study.app.services.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,14 +19,17 @@ public class BookController {
 
   private Logger logger = LoggerFactory.getLogger(BookController.class);
   private BookService bookService;
+  private AuthorService authorService;
 
   @Autowired
-  public BookController(BookService bookService) {
+  public BookController(BookService bookService, AuthorService authorService) {
     this.bookService = bookService;
+    this.authorService = authorService;
   }
 
   @GetMapping(path = "/author")
-  public String booksDict(Model model, HttpSession session) {
+  public String booksDict(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
+    model.addAttribute("author", authorService.getById(id));
     return "/books/author";
   }
 

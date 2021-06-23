@@ -26,24 +26,26 @@ p.error-browser
     <div class="wrap">
       <main class="Middle-main">
         <ul class="breadcrumbs">
-          <li class="breadcrumbs-item"><a href="/index.html">Главная</a>
+          <li class="breadcrumbs-item"><a href="/" th:text="#{pages.title.main}">...</a>
           </li>
-          <li class="breadcrumbs-item"><a href="/genres/index.html">Книги</a>
+          <li class="breadcrumbs-item"><a href="/genres"  th:text="#{pages.title.genres}">...</a>
           </li>
-          <li class="breadcrumbs-item breadcrumbs-item_current"><span>Мара и морок</span>
+          <li class="breadcrumbs-item breadcrumbs-item_current"><span th:text="${book.getTitle()}">...</span>
           </li>
         </ul>
         <div class="Product">
           <div class="ProductCard">
             <div class="ProductCard-look">
-              <div class="ProductCard-photo"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/>
+              <div class="ProductCard-photo">
+                <img th:src="${'/assets/img/content/books/' + book.getImage()}" th:alt="${'/assets/img/content/books/' + book.getImage()}"/>
               </div>
             </div>
             <div class="ProductCard-desc">
               <div class="ProductCard-header">
-                <h1 class="ProductCard-title">Мара и морок
-                </h1>
-                <div class="ProductCard-author"><span class="ProductCard-titleProp">Автор:</span>&#32;<a href="#">Лия Арден</a>
+                <h1 class="ProductCard-title" th:text="${book.getTitle()}">...</h1>
+                <div class="ProductCard-author">
+                  <span class="ProductCard-titleProp" th:text="#{authors.title.single} + ':'">...</span>&#32;
+                  <a th:each="author : ${book.getAuthors()}" th:href="'/authors/slug?id=' + ${author.getId()}" th:text="${author.getTitle()}">...</a>
                 </div>
                 <div class="ProductCard-rating"><span class="ProductCard-titleProp">Рейтинг:</span>
                   <button class="trigger trigger_dropdown" type="button">
@@ -311,9 +313,15 @@ p.error-browser
                         </svg></span>
                       <input name="rating" type="radio" value="5"/></span></span>
                 </div>
-                <div class="ProductCard-tags"><span class="ProductCard-titleProp">Тэги:</span><a href="/tags/">Современные</a>,&#32;<a href="/tags/">Психологическая проза</a>
+                <div class="ProductCard-tags">
+                  <span class="ProductCard-titleProp">Тэги:</span>
+                  <a href="/tags/">Современные</a>,&#32;
+                  <a href="/tags/">Психологическая проза</a>
                 </div>
-                <div class="ProductCard-cost"><span class="ProductCard-titleProp">Цена:</span><span class="ProductCard-priceOld">₽300</span><span class="ProductCard-price">₽180</span>
+                <div class="ProductCard-cost">
+                  <span class="ProductCard-titleProp" th:text="#{books.title.price}">...</span>
+                  <span class="ProductCard-priceOld" th:text="${book.getPriceOld()}">...</span>
+                  <span class="ProductCard-price" th:text="${book.getPrice()}">...</span>
                 </div>
                 <!--+div.-info
                 //+div.-cost
@@ -325,8 +333,7 @@ p.error-browser
                 -->
               </div>
               <div class="ProductCard-text">
-                <p>Таких, как я, называют Марами - отмеченными самой богиней смерти Мораной. Когда-то у меня и моих шести сестер был свой путь. Тогда люди нас уважали и просили о милосердии. Они приносили нам подношения и молились нам. Но 200 лет назад все изменилось, когда принц Серата осмелился поднять руку на одну из нас. Я пыталась отомстить, но погибли мы все. Теперь правители Аракена, погрязшие в длительной войне со своим соседом Сератом, решили вернуть меня к жизни. Дать второй шанс на месть и свободу, привязав меня к тому, против кого я никогда не пойду. Таких, как он, называют Морок, и их боятся абсолютно все.
-                </p>
+                <p th:text="${book.getDescription()}"></p>
               </div>
               <div class="ProductCard-cart">
                 <!--+div.-cartElement.-cartElement_amount-->

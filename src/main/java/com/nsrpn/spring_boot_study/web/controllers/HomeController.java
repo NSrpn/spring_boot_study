@@ -47,7 +47,7 @@ public class HomeController {
   @ModelAttribute(name = "recentList")
   public List<Book>  attrRecentList() {
     return attrBookList().stream().
-            filter(b -> (LocalDate.now().until(b.getAddDate().toLocalDate(), ChronoUnit.DAYS) < 6)).
+            filter(b -> (LocalDate.now().until(b.getPub_date().toLocalDate(), ChronoUnit.DAYS) < 6)).
             collect(Collectors.toList());
   }
 

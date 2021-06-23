@@ -4,36 +4,39 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Authors")
+@Table(name = "authors")
 public class Author extends BaseEntity {
 
     @Column
-    private String imgFileName;
+    private String photo;
 
-    @Column(length = 32000)
-    private String history;
+    @Column(length = 4000)
+    private String description;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Column
+    private String slug;
+
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Author() {
         super();
     }
 
-    public String getImgFileName() {
-        return imgFileName;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setImgFileName(String imgFileName) {
-        this.imgFileName = imgFileName;
+    public void setPhoto(String imgFileName) {
+        this.photo = imgFileName;
     }
 
-    public String getHistory() {
-        return history;
+    public String getDescription() {
+        return description;
     }
 
-    public void setHistory(String history) {
-        this.history = history;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Book> getBooks() {

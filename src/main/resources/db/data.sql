@@ -50,6 +50,10 @@ insert into books (author_id, title, priceOld, price, add_date) values ((select 
 insert into books (author_id, title, priceOld, price, add_date) values ((select id from authors where title='Helyn Schneidar'), 'utilize magnetic supply-chains', 279.70, 77.86, current_date);
 insert into books (author_id, title, priceOld, price, add_date) values ((select id from authors where title='Bette-ann Askem'), 'e-enable dot-com supply-chains', 297.83, 110.15, current_date);
 insert into books (author_id, title, priceOld, price, add_date) values ((select id from authors where title='Dom Robuchon'), 'facilitate efficient eyeballs', 232.30, 131.48, current_date);
+
+-- Insert into authors2books
+insert into authors2book(book_id, author_id, sort_index) select id, author_id, 1 from books;
+
 -- Insert into genres
 insert into genres(title) values('Лёгкое чтение');
 insert into genres(title) values('Фантастика');
