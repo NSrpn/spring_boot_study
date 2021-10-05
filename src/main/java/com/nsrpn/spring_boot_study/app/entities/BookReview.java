@@ -7,19 +7,35 @@ import java.util.Date;
 @Table(name = "book_review")
 public class BookReview extends BaseEntity {
 
+  /**
+   * идентификатор книги
+   */
   @ManyToOne
   @JoinColumn(name = "book_id", nullable = false)
   private Book book;
 
+  /**
+   * идентификатор пользователя, который написал данный отзыв
+   */
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
-  @Column
+  /**
+   * время, когда оставлен отзыв
+   */
+  @Column(nullable = false)
   private Date time;
 
-  @Column
+  /**
+   * текст отзыва
+   */
+  @Column(length = 4000, nullable = false)
   private String text;
+
+  public BookReview() {
+    super();
+  }
 
   public Book getBook() {
     return book;

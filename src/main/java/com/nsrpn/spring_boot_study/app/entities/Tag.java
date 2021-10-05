@@ -12,6 +12,10 @@ public class Tag extends BaseEntity {
   @ManyToMany(mappedBy = "tags")
   private List<Book> books;
 
+  public Tag() {
+    super();
+  }
+
   public List<Book> getBooks() {
     return books;
   }

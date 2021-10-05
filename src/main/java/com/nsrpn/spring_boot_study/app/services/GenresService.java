@@ -1,6 +1,5 @@
 package com.nsrpn.spring_boot_study.app.services;
 
-import com.nsrpn.spring_boot_study.app.entities.BaseEntity;
 import com.nsrpn.spring_boot_study.app.entities.Genres;
 import com.nsrpn.spring_boot_study.app.storage.GenresStorage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class GenresService {
     public List<Genres> getTopGenres() {
         return getAll().stream()
                 .filter(g -> !g.getChildren().isEmpty())
-                .sorted(Comparator.comparing(BaseEntity::getTitle))
+                .sorted(Comparator.comparing(Genres::getName))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 

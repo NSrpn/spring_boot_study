@@ -8,32 +8,65 @@ import java.util.List;
 @Table(name = "books")
 public class Book extends BaseEntity {
 
-  @Column(name = "priceold", precision = 15, scale = 2)
-  private Float priceOld;
+  /**
+   * название книги
+   */
+  @Column(nullable = false)
+  private String title;
 
-  @Column(precision = 15, scale = 2)
-  private Float price;
+  /**
+   * дата публикации
+   */
+  @Column(nullable = false)
+  private Date pub_date;
 
+  /**
+   * книга очень популярна, является бестселлером
+   */
+  @Column(nullable = false)
+  private Boolean is_bestseller;
+
+  /**
+   * мнемонический идентификатор книги
+   */
+  @Column(nullable = false)
+  private String slug;
+
+  /**
+   * изображение обложки
+   */
   @Column
   private String image;
 
-  @Column(precision = 5, scale = 2)
-  private Float discount;
-
-  @Column
-  private Date pub_date;
-
-  @Column
-  private Integer stars;
-
-  @Column
-  private Boolean is_bestseller;
-
-  @Column
-  private String slug;
-
+  /**
+   * описание книги
+   */
   @Column(length = 4000)
   private String description;
+
+  /**
+   * цена в рублях основная
+   */
+  @Column(precision = 15, scale = 2, nullable = false)
+  private Float price;
+
+  /**
+   * цена в рублях старая
+   */
+  @Column(name = "priceold", precision = 15, scale = 2)
+  private Float priceOld;
+
+  /**
+   * скидка в процентах или 0, если её нет
+   */
+  @Column(precision = 5, scale = 2, nullable = false)
+  private Float discount;
+
+  /**
+   * Количество звезд
+   */
+  @Column
+  private Integer stars;
 
   @ManyToMany
   @JoinTable(
@@ -54,7 +87,7 @@ public class Book extends BaseEntity {
           name = "genres2book",
           joinColumns = @JoinColumn(name = "book_id"),
           inverseJoinColumns = @JoinColumn(name = "genre_id"))
-  private List<Tag> genres;
+  private List<Genres> genres;
 
   public Book() {
     super();
@@ -148,4 +181,19 @@ public class Book extends BaseEntity {
     this.description = description;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public List<Genres> getGenres() {
+    return genres;
+  }
+
+  public void setGenres(List<Genres> genres) {
+    this.genres = genres;
+  }
 }

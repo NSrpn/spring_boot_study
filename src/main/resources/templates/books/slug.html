@@ -45,7 +45,7 @@ p.error-browser
                 <h1 class="ProductCard-title" th:text="${book.getTitle()}">...</h1>
                 <div class="ProductCard-author">
                   <span class="ProductCard-titleProp" th:text="#{authors.title.single} + ':'">...</span>&#32;
-                  <a th:each="author : ${book.getAuthors()}" th:href="'/authors/slug?id=' + ${author.getId()}" th:text="${author.getTitle()}">...</a>
+                  <a th:each="author : ${book.getAuthors()}" th:href="'/authors/slug?id=' + ${author.getId()}" th:text="${author.getName()}">...</a>
                 </div>
                 <div class="ProductCard-rating"><span class="ProductCard-titleProp">Рейтинг:</span>
                   <button class="trigger trigger_dropdown" type="button">

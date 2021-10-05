@@ -56,7 +56,7 @@ public class BookController {
 
   @ModelAttribute(name = "bookList")
   public List<Book> attrBookList() {
-    return bookService.getAll();
+    return bookService.getPaged(0, 20).getContent();
   }
 
 }

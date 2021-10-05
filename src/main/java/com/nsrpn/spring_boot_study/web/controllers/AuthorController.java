@@ -55,7 +55,7 @@ public class AuthorController {
     private Set<String> getLiteras(List<Author> authors) {
         return
             authors.stream().map(a -> {
-                String[] parts = a.getTitle().split(" ");
+                String[] parts = a.getName().split(" ");
                 return parts[parts.length - 1].substring(0, 1);
             }).collect(Collectors.toSet());
     }

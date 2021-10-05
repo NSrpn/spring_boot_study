@@ -8,7 +8,7 @@
 <html class="ie9" lang="ru">
 <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-<head th:replace="templates/tplPages::head(${author.getTitle()}, ${author.getTitle()})"></head>
+<head th:replace="templates/tplPages::head(${author.getName()}, ${author.getName()})"></head>
 <body class="Site">
   <!--if lt IE 8
   p.error-browser
@@ -28,10 +28,10 @@
           </li>
           <li class="breadcrumbs-item"><a href="/authors" th:text="#{pages.title.authors}">Авторы</a>
           </li>
-          <li class="breadcrumbs-item breadcrumbs-item_current"><span th:text="${author.getTitle()}"></span>
+          <li class="breadcrumbs-item breadcrumbs-item_current"><span th:text="${author.getName()}"></span>
           </li>
         </ul>
-        <h1 class="Middle-title" th:text="${author.getTitle()}">.</h1>
+        <h1 class="Middle-title" th:text="${author.getName()}">.</h1>
         <article class="Article">
           <div class="sdf">
           </div>

@@ -11,15 +11,11 @@ public class BaseEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(length = 250)
-  private String title;
-
   public BaseEntity() {
   }
 
-  public BaseEntity(Long id, String title) {
+  public BaseEntity(Long id) {
     this.id = id;
-    this.title = title;
   }
 
   public Long getId() {
@@ -28,14 +24,6 @@ public class BaseEntity implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
   }
 
   public String toString() {

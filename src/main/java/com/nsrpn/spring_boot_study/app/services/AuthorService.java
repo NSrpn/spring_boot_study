@@ -20,7 +20,7 @@ public class AuthorService {
     public List<Author> getByLetter(String letter) {
         List<Author> all = authorRepo.findAll();
         return all.stream().filter(a -> {
-            String[] parts = a.getTitle().split(" ");
+            String[] parts = a.getName().split(" ");
             return parts[parts.length - 1].substring(0, 1).equals(letter);
         }).collect(Collectors.toList());
     }

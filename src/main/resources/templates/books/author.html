@@ -28,10 +28,10 @@
           </li>
           <li class="breadcrumbs-item"><a href="/genres" th:text="#{pages.title.genres}">Жанры</a>
           </li>
-          <li class="breadcrumbs-item breadcrumbs-item_current"><span th:text="${author.getTitle()}"></span>
+          <li class="breadcrumbs-item breadcrumbs-item_current"><span th:text="${author.getName()}"></span>
           </li>
         </ul>
-        <h1 class="Middle-title" th:text="${author.getTitle()}">
+        <h1 class="Middle-title" th:text="${author.getName()}">
         </h1>
         <div class="Section">
           <div class="Cards Cards_refresh">
