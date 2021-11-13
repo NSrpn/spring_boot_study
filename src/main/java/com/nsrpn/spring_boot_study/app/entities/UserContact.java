@@ -17,7 +17,7 @@ public class UserContact extends BaseEntity {
   /**
    * тип контакта (телефон или e-mail)
    */
-  @Column(columnDefinition = "VARCHAR(10) CHECK (value IN ('PHONE', 'EMAIL'))")
+  @Column(columnDefinition = "VARCHAR(10) CHECK (type IN ('PHONE', 'EMAIL'))")
   private String type;
 
   /**

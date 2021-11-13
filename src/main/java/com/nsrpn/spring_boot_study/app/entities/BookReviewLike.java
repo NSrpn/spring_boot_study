@@ -31,7 +31,7 @@ public class BookReviewLike extends BaseEntity {
    * лайк (1) или дизлайк (-1)
    */
   @Column(columnDefinition = "INT CHECK (value IN (-1, 1))", nullable = false)
-  private Date value;
+  private Integer value;
 
   public BookReviewLike() {
     super();
@@ -61,11 +61,11 @@ public class BookReviewLike extends BaseEntity {
     this.time = time;
   }
 
-  public Date getValue() {
+  public Integer getValue() {
     return value;
   }
 
-  public void setValue(Date value) {
+  public void setValue(Integer value) {
     this.value = value;
   }
 }

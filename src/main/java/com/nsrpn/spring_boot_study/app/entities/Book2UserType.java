@@ -9,13 +9,13 @@ public class Book2UserType extends BaseEntity {
   /**
    * наименование типа привязки
    */
-  @Column(columnDefinition = "VARCHAR(20) CHECK (value IN ('Отложена', 'В корзине', 'Куплена', 'В архиве'))", nullable = false)
+  @Column(columnDefinition = "VARCHAR(20) CHECK (name IN ('Отложена', 'В корзине', 'Куплена', 'В архиве'))", nullable = false)
   private String name;
 
   /**
    * код типа привязки
    */
-  @Column(columnDefinition = "VARCHAR(20) CHECK (value IN ('KEPT', 'CART', 'PAID', 'ARCHIVED'))", nullable = false)
+  @Column(columnDefinition = "VARCHAR(20) CHECK (code IN ('KEPT', 'CART', 'PAID', 'ARCHIVED'))", nullable = false)
   private String code;
 
   public Book2UserType() {

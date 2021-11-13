@@ -1,0 +1,253 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/pro
+                                       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Spn" id="change_authors_as_in_doc">
+        <renameColumn tableName="authors" oldColumnName="title" newColumnName="name" />
+    </changeSet>
+    <changeSet author="Spn" id="add_balance_transaction">
+        <createTable tableName="balance_transaction">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="balance_tran_pkey"/>
+            </column>
+            <column name="book_id" type="BIGINT" />
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="INT" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(4000)" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="balance_transaction" baseColumnNames="book_id" constraintName="fk_balance_tran_book" referencedTableName="books"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="balance_transaction" baseColumnNames="user_id" constraintName="fk_balance_tran_user" referencedTableName="users"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="add_book2user">
+        <createTable tableName="book2user_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book2user_type_pkey"/>
+            </column>
+            <column name="code" type="varchar(20)" defaultValue="0" >
+                <constraints nullable="false" checkConstraint="CHECK (code IN ('KEPT', 'CART', 'PAID', 'ARCHIVED'))"/>
+            </column>
+            <column name="name" type="varchar(20)" defaultValue="0" >
+                <constraints nullable="false" checkConstraint="CHECK (name IN ('Отложена', 'В корзине', 'Куплена', 'В архиве'))"/>
+            </column>
+        </createTable>
+        <createTable tableName="book2user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book2user_pkey"/>
+            </column>
+            <column name="book_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="date" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book2user" baseColumnNames="book_id" constraintName="fk_book2user_book" referencedTableName="books"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="book2user" baseColumnNames="user_id" constraintName="fk_book2user_user" referencedTableName="users"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="book2user" baseColumnNames="type_id" constraintName="fk_book2user_type" referencedTableName="book2user_type"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="add_bookFile">
+        <createTable tableName="book_file_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_file_type_pkey"/>
+            </column>
+            <column name="name" type="varchar(255)" >
+                <constraints nullable="false" checkConstraint="CHECK (code IN ('PDF', 'EPUB', 'FB2'))"/>
+            </column>
+            <column name="description" type="varchar(4000)" defaultValue="0" />
+        </createTable>
+        <createTable tableName="book_file">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_file_pkey"/>
+            </column>
+            <column name="hash" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="" />
+            </column>
+            <column name="path" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book_file" baseColumnNames="type_id" constraintName="fk_book_file_type_type" referencedTableName="book_file_type"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="add_bookReview">
+        <createTable tableName="book_review">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_review_pkey"/>
+            </column>
+            <column name="book_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="varchar(4000)" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book_review" baseColumnNames="book_id" constraintName="fk_book_review_book"
+                                 referencedTableName="books" referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="book_review" baseColumnNames="user_id" constraintName="fk_book_review_user"
+                                 referencedTableName="users" referencedColumnNames="id" />
+
+        <createTable tableName="book_review_like">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_review_like_pkey"/>
+            </column>
+            <column name="review_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="INT" >
+                <constraints nullable="false" checkConstraint="CHECK (value IN (-1, 1))"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book_review_like" baseColumnNames="type_id" constraintName="fk_book_review_like_review"
+                                 referencedTableName="book_review" referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="book_review_like" baseColumnNames="user_id" constraintName="fk_book_review_like_user"
+                                 referencedTableName="users" referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="add_document">
+        <createTable tableName="document">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="document_pkey"/>
+            </column>
+            <column name="sort_index" type="INT" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="varchar(4000)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="varchar(255)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Spn" id="add_FAQ">
+        <createTable tableName="faq">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="faq_pkey"/>
+            </column>
+            <column name="sort_index" type="INT" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="answer" type="varchar(4000)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="question" type="varchar(255)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Spn" id="add_FileDownload">
+        <createTable tableName="file_download">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="file_download_pkey"/>
+            </column>
+            <column name="count" type="INT" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="file_download" baseColumnNames="book_id" constraintName="fk_file_download_book" referencedTableName="books"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="file_download" baseColumnNames="user_id" constraintName="fk_file_download_user" referencedTableName="users"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="change_genres_as_in_doc">
+        <renameColumn tableName="genres" oldColumnName="title" newColumnName="name" />
+    </changeSet>
+    <changeSet author="Spn" id="add_Message">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="messsage_pkey"/>
+            </column>
+            <column name="time" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="varchar(4000)" defaultValue="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" />
+            <column name="email" type="varchar(255)" />
+            <column name="subject" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)" />
+        </createTable>
+        <addForeignKeyConstraint baseTableName="message" baseColumnNames="user_id" constraintName="fk_message_user" referencedTableName="users"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet author="Spn" id="change_users_as_in_doc">
+        <renameColumn tableName="users" oldColumnName="title" newColumnName="name" />
+    </changeSet>
+    <changeSet author="Spn" id="add_UserContract">
+        <createTable tableName="user_contact">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_contact_pkey"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(10)" >
+                <constraints nullable="false" checkConstraint="CHECK (type IN ('PHONE', 'EMAIL'))"/>
+            </column>
+            <column name="approved" type="INT" >
+                <constraints nullable="false" checkConstraint="CHECK (value IN (0, 1))"/>
+            </column>
+            <column name="code" type="varchar(255)" />
+            <column name="codeTrials" type="INT" />
+            <column name="codeTime" type="date" />
+            <column name="contact" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_contact" baseColumnNames="user_id" constraintName="fk_user_contact_user" referencedTableName="users"
+                                 referencedColumnNames="id" />
+    </changeSet>
+</databaseChangeLog>
