@@ -139,7 +139,7 @@
                 <constraints nullable="false" checkConstraint="CHECK (value IN (-1, 1))"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="book_review_like" baseColumnNames="type_id" constraintName="fk_book_review_like_review"
+        <addForeignKeyConstraint baseTableName="book_review_like" baseColumnNames="review_id" constraintName="fk_book_review_like_review"
                                  referencedTableName="book_review" referencedColumnNames="id" />
         <addForeignKeyConstraint baseTableName="book_review_like" baseColumnNames="user_id" constraintName="fk_book_review_like_user"
                                  referencedTableName="users" referencedColumnNames="id" />
@@ -201,6 +201,11 @@
     </changeSet>
     <changeSet author="Spn" id="change_genres_as_in_doc">
         <renameColumn tableName="genres" oldColumnName="title" newColumnName="name" />
+        <addColumn tableName="genres">
+            <column name="slug" type="varchar(255)" defaultValue="/">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
     </changeSet>
     <changeSet author="Spn" id="add_Message">
         <createTable tableName="message">

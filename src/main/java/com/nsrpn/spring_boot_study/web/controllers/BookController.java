@@ -3,6 +3,9 @@ package com.nsrpn.spring_boot_study.web.controllers;
 import com.nsrpn.spring_boot_study.app.entities.Book;
 import com.nsrpn.spring_boot_study.app.services.AuthorService;
 import com.nsrpn.spring_boot_study.app.services.BookService;
+import com.nsrpn.spring_boot_study.web.configuration.SpringfoxConfig;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +17,13 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/books")
+@RequestMapping
+@Api(tags = SpringfoxConfig.BOOKS_TAG)
 public class BookController {
 
-  private Logger logger = LoggerFactory.getLogger(BookController.class);
-  private BookService bookService;
-  private AuthorService authorService;
+  private final Logger logger = LoggerFactory.getLogger(BookController.class);
+  private final BookService bookService;
+  private final AuthorService authorService;
 
   @Autowired
   public BookController(BookService bookService, AuthorService authorService) {
@@ -27,26 +31,33 @@ public class BookController {
     this.authorService = authorService;
   }
 
-  @GetMapping(path = "/author")
+  @GetMapping(path = "/books/author")
   public String booksDict(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
     model.addAttribute("author", authorService.getById(id));
     return "/books/author";
   }
 
-  @GetMapping(path = "/recent")
+  @GetMapping(path = "/books/recent")
   public String booksRecent(Model model, HttpSession session) {
     return "/books/recent";
   }
 
-  @GetMapping(path = "/popular")
+  @GetMapping(path = "/books/popular")
   public String booksPopular(Model model, HttpSession session) {
     return "/books/popular";
   }
 
-  @GetMapping(path = "/slug")
+  @GetMapping(path = "/books/slug")
   public String booksSlug(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
     model.addAttribute("book", bookService.getById(id));
     return "/books/slug";
+  }
+
+  @ApiOperation("Get all books")
+  @GetMapping("/api/books")
+  @ResponseBody
+  public List<Book> getBooksApi() {
+    return bookService.getAll();
   }
 
   @ModelAttribute(name = "book")

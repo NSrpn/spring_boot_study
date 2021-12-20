@@ -1,36 +1,35 @@
 package com.nsrpn.spring_boot_study.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "authors")
+@ApiModel("Authors data model")
 public class Author extends BaseEntity {
-  /**
-   * имя и фамилия автора
-   */
+
   @Column(nullable = false)
+  @ApiModelProperty("Author's name")
   private String name;
 
-  /**
-   * изображение с фотографией автора
-   */
   @Column
+  @ApiModelProperty("Author's photo")
   private String photo;
 
-  /**
-   * мнемонический идентификатор автора, который будет отображаться в ссылке на его страницу
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Author's mnemonic id page")
   private String slug;
 
-  /**
-   * описание (биография, характеристика)
-   */
   @Column(length = 4000)
+  @ApiModelProperty("Author's biography")
   private String description;
 
   @ManyToMany(mappedBy = "authors")
+  @JsonIgnore
   private Set<Book> books;
 
   public Author() {

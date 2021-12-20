@@ -14,5 +14,5 @@
     <include file="db/changelog/db.changelog-authors2book.xml" />
     <include file="db/changelog/db.changelog-genres2book.xml" />
     <include file="db/changelog/db.changelog-users.xml" />
-    <include file="db/changelog/db.changelog-bookReview.xml" />
+    <include file="db/changelog/db.changelog-fullTables.xml" />
 </databaseChangeLog>

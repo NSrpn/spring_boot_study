@@ -38,20 +38,20 @@
                 </div>
                 <div th:each="ch : ${genre.getChildren()}">
                   <div class="Tag" th:if="${#sets.isEmpty(ch.getChildren())}">
-                    <a th:href="${'/genres/slug?id=' + ch.getId()}" th:text="${ch.getTitle()}">
+                    <a th:href="${'/genres/slug?id=' + ch.getId()}" th:text="${ch.getName()}">
                       <span class="undefined-amount" th:text="'0'"></span>
                     </a>
                   </div>
                   <div class="Tags" th:if="${not #sets.isEmpty(ch.getChildren())}">
                     <div class="Tags-title">
                       <div class="Tag">
-                        <a th:href="${'/genres/slug?id=' + ch.getId()}" th:text="${ch.getTitle()}">
+                        <a th:href="${'/genres/slug?id=' + ch.getId()}" th:text="${ch.getName()}">
                           <span class="undefined-amount" th:text="'0'"></span>
                         </a>
                       </div>
                     </div>
                     <div class="Tag" th:each="chch : ${ch.getChildren()}">
-                      <a th:href="${'/genres/slug?id=' + chch.getId()}" th:text="${chch.getTitle}">
+                      <a th:href="${'/genres/slug?id=' + chch.getId()}" th:text="${chch.getName}">
                         <span class="undefined-amount" th:text="'0'"></span>
                       </a>
                     </div>

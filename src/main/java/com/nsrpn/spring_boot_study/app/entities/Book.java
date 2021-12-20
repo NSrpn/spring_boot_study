@@ -1,71 +1,55 @@
 package com.nsrpn.spring_boot_study.app.entities;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "books")
+@ApiModel("Books data model")
 public class Book extends BaseEntity {
 
-  /**
-   * название книги
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Book's title")
   private String title;
 
-  /**
-   * дата публикации
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Book's publish date")
   private Date pub_date;
 
-  /**
-   * книга очень популярна, является бестселлером
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Is a book bestseller")
   private Boolean is_bestseller;
 
-  /**
-   * мнемонический идентификатор книги
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Book's mnemonic id")
   private String slug;
 
-  /**
-   * изображение обложки
-   */
   @Column
+  @ApiModelProperty("Book's image")
   private String image;
 
-  /**
-   * описание книги
-   */
   @Column(length = 4000)
+  @ApiModelProperty("Book's description")
   private String description;
 
-  /**
-   * цена в рублях основная
-   */
   @Column(precision = 15, scale = 2, nullable = false)
+  @ApiModelProperty("Book's main price")
   private Float price;
 
-  /**
-   * цена в рублях старая
-   */
   @Column(name = "priceold", precision = 15, scale = 2)
+  @ApiModelProperty("Book's old price")
   private Float priceOld;
 
-  /**
-   * скидка в процентах или 0, если её нет
-   */
   @Column(precision = 5, scale = 2, nullable = false)
+  @ApiModelProperty("Discount")
   private Float discount;
 
-  /**
-   * Количество звезд
-   */
   @Column
+  @ApiModelProperty("Book's rating")
   private Integer stars;
 
   @ManyToMany

@@ -1,41 +1,37 @@
 package com.nsrpn.spring_boot_study.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="Genres")
+@ApiModel("Genres data model")
 public class Genres extends BaseEntity{
 
-  /**
-   * наименование жанра
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Genre's title")
   private String name;
 
-  /**
-   * идентификатор родительского жанра или NULL, если жанр является корневым
-   */
   @ManyToOne
   @JoinColumn(name = "parent_id", nullable = true)
+  @JsonIgnore
+  @ApiModelProperty("Genre's parent id, or null if not exists")
   private Genres parent;
 
-  /**
-   * под-жанры
-   */
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  @ApiModelProperty("Genre's childs")
   private List<Genres> children;
 
-  /**
-   * список книг
-   */
   @ManyToMany(mappedBy = "genres")
+  @JsonIgnore
   private List<Book> books;
 
-  /**
-   * мнемонический код жанра, используемый в ссылках на страницу данного жанра
-   */
   @Column(nullable = false)
+  @ApiModelProperty("Genre's mnemonic id")
   private String slug;
 
   public Genres() {
