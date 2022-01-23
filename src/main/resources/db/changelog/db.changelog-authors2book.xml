@@ -14,12 +14,5 @@
             <column name="book_id" />
             <column name="author_id" />
         </createIndex>
-        <sql dbms="oracle, postgresql"
-             endDelimiter="\nGO"
-             splitStatements="true"
-             stripComments="true">insert into authors2book(book_id, author_id, sort_index) select id, author_id, 1 from books
-            <comment>Fill authors for books</comment>
-        </sql>
-
     </changeSet>
 </databaseChangeLog>

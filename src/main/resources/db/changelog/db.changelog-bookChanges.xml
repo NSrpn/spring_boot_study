@@ -8,7 +8,8 @@
             <column name="is_bestseller"
                     type="boolean"/>
             <column name="slug"
-                    type="varchar(255)"/>
+                    type="varchar(255)"
+                    defaultValue="gen_random_uuid()"/>
             <column name="description"
                     type="varchar(4000)"/>
         </addColumn>

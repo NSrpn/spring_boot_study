@@ -5,7 +5,8 @@
         <renameColumn tableName="authors" oldColumnName="img_file_name" newColumnName="photo" />
         <addColumn tableName="authors">
             <column name="slug"
-                    type="varchar(255)"/>
+                    type="varchar(255)"
+                    defaultValue="gen_random_uuid()"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>

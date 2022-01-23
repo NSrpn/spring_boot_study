@@ -155,7 +155,7 @@
             <column name="text" type="varchar(4000)" >
                 <constraints nullable="false"/>
             </column>
-            <column name="slug" type="varchar(255)" >
+            <column name="slug" type="varchar(255)" defaultValue="gen_random_uuid()">
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="varchar(255)" >
@@ -202,7 +202,7 @@
     <changeSet author="Spn" id="change_genres_as_in_doc">
         <renameColumn tableName="genres" oldColumnName="title" newColumnName="name" />
         <addColumn tableName="genres">
-            <column name="slug" type="varchar(255)" defaultValue="/">
+            <column name="slug" type="varchar(255)" defaultValue="gen_random_uuid()">
                 <constraints nullable="false"/>
             </column>
         </addColumn>

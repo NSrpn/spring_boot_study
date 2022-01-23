@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "books")
 @ApiModel("Books data model")
-public class Book extends BaseEntity {
+public class Book extends SluggedEntity {
 
   @Column(nullable = false)
   @ApiModelProperty("Book's title")
@@ -23,10 +23,6 @@ public class Book extends BaseEntity {
   @Column(nullable = false)
   @ApiModelProperty("Is a book bestseller")
   private Boolean is_bestseller;
-
-  @Column(nullable = false)
-  @ApiModelProperty("Book's mnemonic id")
-  private String slug;
 
   @Column
   @ApiModelProperty("Book's image")
@@ -147,14 +143,6 @@ public class Book extends BaseEntity {
 
   public void setIs_bestseller(Boolean is_bestseller) {
     this.is_bestseller = is_bestseller;
-  }
-
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
   }
 
   public String getDescription() {

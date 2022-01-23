@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "authors")
 @ApiModel("Authors data model")
-public class Author extends BaseEntity {
+public class Author extends SluggedEntity {
 
   @Column(nullable = false)
   @ApiModelProperty("Author's name")
@@ -19,10 +19,6 @@ public class Author extends BaseEntity {
   @Column
   @ApiModelProperty("Author's photo")
   private String photo;
-
-  @Column(nullable = false)
-  @ApiModelProperty("Author's mnemonic id page")
-  private String slug;
 
   @Column(length = 4000)
   @ApiModelProperty("Author's biography")
@@ -68,11 +64,4 @@ public class Author extends BaseEntity {
     this.name = title;
   }
 
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
-  }
 }

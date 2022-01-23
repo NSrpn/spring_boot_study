@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "document")
-public class Document extends BaseEntity {
+public class Document extends SluggedEntity {
 
   /**
    * порядковый номер документа (для вывода на странице списка документов)
@@ -19,12 +19,6 @@ public class Document extends BaseEntity {
    */
   @Column(length = 4000, nullable = false)
   private String text;
-
-  /**
-   * мнемонический код документа, отображаемый в ссылке на страницу документа
-   */
-  @Column(nullable = false)
-  private String slug;
 
   /**
    * наименование документа
@@ -60,11 +54,4 @@ public class Document extends BaseEntity {
     this.text = text;
   }
 
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
-  }
 }

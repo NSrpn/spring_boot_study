@@ -22,9 +22,6 @@
             <column name="priceold" type="FLOAT4"/>
             <column name="sale" type="FLOAT4"/>
             <column name="stars" type="INTEGER"/>
-            <column name="author_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
     <changeSet author="Spn (generated)" id="1623869732177-3">
@@ -53,9 +50,6 @@
             </column>
             <column name="title" type="VARCHAR(250)"/>
         </createTable>
-    </changeSet>
-    <changeSet author="Spn (generated)" id="1623869732177-6">
-        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="books" constraintName="fkfjixh2vym2cvfj3ufxj91jem7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="authors" validate="true"/>
     </changeSet>
     <changeSet author="Spn (generated)" id="1623869732177-7">
         <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="tags2book" constraintName="fkdctrsivdw6qf5y2ypvpc16vg8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="books" validate="true"/>

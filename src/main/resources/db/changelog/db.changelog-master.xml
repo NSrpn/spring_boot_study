@@ -8,11 +8,11 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="db/changelog/db.changelog-init.xml" />
-    <include file="db/changelog/db.changelog-loadTempData.xml" />
     <include file="db/changelog/db.changelog-bookChanges.xml" />
     <include file="db/changelog/db.changelog-authorChanges.xml" />
     <include file="db/changelog/db.changelog-authors2book.xml" />
     <include file="db/changelog/db.changelog-genres2book.xml" />
     <include file="db/changelog/db.changelog-users.xml" />
     <include file="db/changelog/db.changelog-fullTables.xml" />
+    <include file="db/changelog/db.changelog-loadTempData.xml" />
 </databaseChangeLog>

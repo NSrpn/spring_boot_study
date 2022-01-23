@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name="Genres")
 @ApiModel("Genres data model")
-public class Genres extends BaseEntity{
+public class Genres extends SluggedEntity{
 
   @Column(nullable = false)
   @ApiModelProperty("Genre's title")
@@ -30,20 +30,8 @@ public class Genres extends BaseEntity{
   @JsonIgnore
   private List<Book> books;
 
-  @Column(nullable = false)
-  @ApiModelProperty("Genre's mnemonic id")
-  private String slug;
-
   public Genres() {
     super();
-  }
-
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
   }
 
   public List<Genres> getChildren() {

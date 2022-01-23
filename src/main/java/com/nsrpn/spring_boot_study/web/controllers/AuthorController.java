@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping
 @Api(tags = SpringfoxConfig.AUTHORS_TAG)
-public class AuthorController {
+public class AuthorController extends SluggedController<Author> {
     private final String contentPage = "authorDict";
     private final Logger logger = LoggerFactory.getLogger(AuthorController.class);
     private final AuthorService authorService;
@@ -38,13 +38,13 @@ public class AuthorController {
         prepareCommonModelForIndex(letter, model, session);
         return "/authors/index";
     }
-
+/*
     @GetMapping("/authors/slug")
     public String getAuthor(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
         prepareCommonModelForSlug(id, model, session);
         return "/authors/slug";
     }
-
+*/
     @ApiOperation("Get all authors")
     @GetMapping("/api/authors")
     @ResponseBody
@@ -60,7 +60,7 @@ public class AuthorController {
     private void prepareCommonModelForIndex(String letter, Model model, HttpSession session) {
         List<Author> authors = authorService.getAll();
         Set<String> literas = getLiteras(authors);
-        model.addAttribute("authorsList", authorService.getByLetter(letter != null ? letter : (String) literas.toArray()[0]));
+        model.addAttribute("authorsList", authorService.getByLetter(letter != null ? letter : (!literas.isEmpty() ? (String) literas.toArray()[0] : null)));
         model.addAttribute("literasList", literas);
     }
 
@@ -71,4 +71,9 @@ public class AuthorController {
                 return parts[parts.length - 1].substring(0, 1);
             }).collect(Collectors.toSet());
     }
+
+    @Override
+    public String getModelName() {
+        return "author";
+    };
 }
