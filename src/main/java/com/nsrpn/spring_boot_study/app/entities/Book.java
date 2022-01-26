@@ -32,17 +32,17 @@ public class Book extends SluggedEntity {
   @ApiModelProperty("Book's description")
   private String description;
 
-  @Column(precision = 15, scale = 2, nullable = false)
+  @Column(precision = 15, nullable = false)
   @ApiModelProperty("Book's main price")
-  private Float price;
+  private Integer price;
 
-  @Column(name = "priceold", precision = 15, scale = 2)
+  @Column(name = "priceold", precision = 15)
   @ApiModelProperty("Book's old price")
-  private Float priceOld;
+  private Integer priceOld;
 
-  @Column(precision = 5, scale = 2, nullable = false)
+  @Column(precision = 5, nullable = false)
   @ApiModelProperty("Discount")
-  private Float discount;
+  private Integer discount;
 
   @Column
   @ApiModelProperty("Book's rating")
@@ -81,19 +81,19 @@ public class Book extends SluggedEntity {
     this.authors = authors;
   }
 
-  public Float getPriceOld() {
+  public Integer getPriceOld() {
     return priceOld;
   }
 
-  public void setPriceOld(Float priceOld) {
+  public void setPriceOld(Integer priceOld) {
     this.priceOld = priceOld;
   }
 
-  public Float getPrice() {
+  public Integer getPrice() {
     return price;
   }
 
-  public void setPrice(Float price) {
+  public void setPrice(Integer price) {
     this.price = price;
   }
 
@@ -105,11 +105,11 @@ public class Book extends SluggedEntity {
     this.image = image;
   }
 
-  public Float getDiscount() {
+  public Integer getDiscount() {
     return discount;
   }
 
-  public void setDiscount(Float discount) {
+  public void setDiscount(Integer discount) {
     this.discount = discount;
   }
 

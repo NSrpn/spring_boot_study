@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,36 @@ public class BookController {
   public String booksSlug(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
     model.addAttribute("book", bookService.getById(id));
     return "/books/slug";
+  }
+
+  @GetMapping(path = "/books/by-author")
+  public ResponseEntity<List<Book>> byAuthor(@RequestParam(value = "author") String author) {
+    return ResponseEntity.ok(bookService.getBookByAuthorsNameContaining(author));
+  }
+
+  @GetMapping(path = "/books/by-title")
+  public ResponseEntity<List<Book>> byTitle(@RequestParam(value = "title") String title) {
+    return ResponseEntity.ok(bookService.getBookByTitleContaining(title));
+  }
+
+  @GetMapping(path = "/books/by-price-range")
+  public ResponseEntity<List<Book>> byPriceRange(@RequestParam(value = "min") Integer min, @RequestParam(value = "max") Integer max) {
+    return ResponseEntity.ok(bookService.getBookByPriceOldBetween(min, max));
+  }
+
+  @GetMapping(path = "/books/by-price")
+  public ResponseEntity<List<Book>> byPrice(@RequestParam(value = "price") Integer price) {
+    return ResponseEntity.ok(bookService.getBookByPrice(price));
+  }
+
+  @GetMapping(path = "/books/by-discount")
+  public ResponseEntity<List<Book>> byDiscount() {
+    return ResponseEntity.ok(bookService.getBooksWithMaxDiscount());
+  }
+
+  @GetMapping(path = "/books/bestsellers")
+  public ResponseEntity<List<Book>> bestsellers() {
+    return ResponseEntity.ok(bookService.getBestsellers());
   }
 
   @ApiOperation("Get all books")
