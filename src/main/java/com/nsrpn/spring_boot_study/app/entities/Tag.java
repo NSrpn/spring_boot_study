@@ -1,5 +1,6 @@
 package com.nsrpn.spring_boot_study.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ public class Tag extends BaseEntity {
   @Column(nullable = false)
   private String title;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "tags")
   private List<Book> books;
 

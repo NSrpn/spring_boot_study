@@ -48,8 +48,8 @@
             </form>
           </div>
           <div class="Cards Cards_refresh">
-            <div th:each="book : ${books}">
-              <div class="Card" th:replace="templates/tplPages::card(book)"></div>
+            <div th:each="book : ${bookList}">
+              <div class="Card" th:replace="templates/tplPages::card(${book})"></div>
             </div>
             <div class="Cards-footer Cards-footer_center">
               <a class="btn btn_primary" href="#" data-refreshshow="recent" data-refreshoffset="20" data-refreshlimit="20">Показать еще</a>

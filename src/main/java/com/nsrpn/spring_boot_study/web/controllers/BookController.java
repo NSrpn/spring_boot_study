@@ -4,17 +4,20 @@ import com.nsrpn.spring_boot_study.app.entities.Book;
 import com.nsrpn.spring_boot_study.app.services.AuthorService;
 import com.nsrpn.spring_boot_study.app.services.BookService;
 import com.nsrpn.spring_boot_study.web.configuration.SpringfoxConfig;
+import com.nsrpn.spring_boot_study.web.data.RespObjBook;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -52,6 +55,40 @@ public class BookController {
   public String booksSlug(@RequestParam(value = "id") Long id, Model model, HttpSession session) {
     model.addAttribute("book", bookService.getById(id));
     return "/books/slug";
+  }
+
+  @RequestMapping(
+          value = "/books/slider/recommended",
+          method = RequestMethod.GET,
+          produces="application/json"
+  )
+  @ResponseBody
+  public RespObjBook getSliderRecommended(@RequestParam(value = "offset") Integer offset, @RequestParam(value = "limit") Integer limit) {
+    Page<Book> page = bookService.getPaged(offset, limit);
+    return new RespObjBook(page.stream().count(), page.getContent());
+  }
+
+  @RequestMapping(
+          value = "/books/slider/popular",
+          method = RequestMethod.GET,
+          produces="application/json"
+  )
+  @ResponseBody
+  public RespObjBook getSliderPopular(@RequestParam(value = "offset") Integer offset, @RequestParam(value = "limit") Integer limit) {
+    Page<Book> page = bookService.getPaged(offset, limit);
+    return new RespObjBook(page.stream().count(), page.getContent());
+  }
+
+  @RequestMapping(
+          value = "/books/slider/recent",
+          method = RequestMethod.GET,
+          produces="application/json"
+  )
+  @ResponseBody
+  public RespObjBook getSliderRecent(@RequestParam(value = "from", required = false) Date from, @RequestParam(value = "to", required = false) Date to,
+                                     @RequestParam(value = "offset") Integer offset, @RequestParam(value = "limit") Integer limit) {
+    Page<Book> page = bookService.getPaged(offset, limit);
+    return new RespObjBook(page.stream().count(), page.getContent());
   }
 
   @GetMapping(path = "/books/by-author")

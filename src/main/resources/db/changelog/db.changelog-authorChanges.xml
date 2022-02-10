@@ -3,10 +3,8 @@
     <changeSet author="Spn" id="2">
         <renameColumn tableName="authors" oldColumnName="history" newColumnName="description" />
         <renameColumn tableName="authors" oldColumnName="img_file_name" newColumnName="photo" />
-        <addColumn tableName="authors">
-            <column name="slug"
-                    type="varchar(255)"
-                    defaultValue="gen_random_uuid()"/>
-        </addColumn>
+        <sql dbms="oracle, postgresql">
+            ALTER TABLE public.authors ADD COLUMN slug character varying(255) DEFAULT gen_random_uuid();
+        </sql>
     </changeSet>
 </databaseChangeLog>

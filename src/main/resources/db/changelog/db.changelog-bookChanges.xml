@@ -7,11 +7,11 @@
         <addColumn tableName="books">
             <column name="is_bestseller"
                     type="boolean"/>
-            <column name="slug"
-                    type="varchar(255)"
-                    defaultValue="gen_random_uuid()"/>
             <column name="description"
                     type="varchar(4000)"/>
         </addColumn>
+        <sql dbms="oracle, postgresql">
+            ALTER TABLE public.books ADD COLUMN slug character varying(255) DEFAULT gen_random_uuid();
+        </sql>
     </changeSet>
 </databaseChangeLog>

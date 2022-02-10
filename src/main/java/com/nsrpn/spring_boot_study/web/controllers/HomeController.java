@@ -4,6 +4,7 @@ import com.nsrpn.spring_boot_study.app.entities.Book;
 import com.nsrpn.spring_boot_study.app.entities.Tag;
 import com.nsrpn.spring_boot_study.app.services.BookService;
 import com.nsrpn.spring_boot_study.app.services.TagService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,9 +40,14 @@ public class HomeController {
     return new Book();
   }
 
+  @ModelAttribute(name = "recommendedList")
+  public List<Book> attrRecommendedList() {
+    return bookService.getPaged(0, 10).getContent();
+  }
+
   @ModelAttribute(name = "bookList")
   public List<Book> attrBookList() {
-    return bookService.getAll();
+    return bookService.getPaged(0, 10).getContent();
   }
 
   @ModelAttribute(name = "recentList")
